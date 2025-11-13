@@ -38,7 +38,7 @@ evaluate-commands %sh{
 	#                            -> ffead0:-7,fff5e8:9,96f8f8:-12,ffd4db (duochromatic orange/cyan theme)
 	#                            -> 96f8f8:-12,fff5e8:9,ffd9b6:-7        (triadic cyan/orange/salmon theme)
 
-   [ "$kak_opt_filetype" = 'markdown' ] && BG=${BG:-ffead0:-7,fff5e8:9,96f8f8:-12,ffd4db}
+   [ "$kak_opt_filetype" = 'markdown' ] && BG=${BG:-ffead0:-7,fff5e8:9,96f8f8:-12,fa8c69}
 
 	setbg() {
 		hex=$(echo $BG,,, | cut -s -d, -f$1)
@@ -117,7 +117,7 @@ evaluate-commands %sh{
 		capslock )
 			background="rgb:${CAPSLOCK}"
 			menu="rgb:${INSERT}"
-			secondary="${soft_red}"
+			secondary="rgb:${NORMAL}"
 			comment="$(desaturate ${background})"
 			if [ $lighten ] ;then
 				if [ "${kak_opt_mode}" = 'normal' ] ;then
