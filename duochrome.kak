@@ -31,25 +31,26 @@ evaluate-commands %sh{
 		done | xargs printf 'rgb:%s'
 	}
 
-	# Usage: setbg <BG #> <varname> <default:lightness>
-	#              where, BG=<normal[:lightness]>,<insert[:lightness]>,<capslock[:lightness]> SEE: kak wrapper
+	# Usage: setbg <BG #> <varname> <default[:lightness]>
+	#              where, BG=<normal[:lightness]>,<insert[:lightness]>,<capslock[:lightness]>,<secondary>  SEE: kak wrapper
 	#                     <[+|-]lightness> is hsla lightness (lighten/darken) adjustment percentage for ruler
-	#              example: $BG= -> ffead0:-7,fff5e8:9,ffd7a6:-8  (monochromatic orange theme)
-	#                            -> ffead0:-7,fff5e8:9,96f8f8:-12 (duochromatic orange/cyan theme)
-	#                            -> 96f8f8:-12,fff5e8:9,ffd9b6:-7 (triadic cyan/orange/salmon theme)
+	#              example: $BG= -> ffead0:-7,fff5e8:9,ffd7a6:-8         (monochromatic orange theme)
+	#                            -> ffead0:-7,fff5e8:9,96f8f8:-12,ffd4db (duochromatic orange/cyan theme)
+	#                            -> 96f8f8:-12,fff5e8:9,ffd9b6:-7        (triadic cyan/orange/salmon theme)
 
-   [ "$kak_opt_filetype" = 'markdown' ] && BG=${BG:-ffead0:-7,fff5e8:9,96f8f8:-12} || BG=${BG:-96f8f8:-12,fff5e8:9,ffd9b6:-7}
+   [ "$kak_opt_filetype" = 'markdown' ] && BG=${BG:-ffead0:-7,fff5e8:9,96f8f8:-12,ffd4db}
 
 	setbg() {
-		hex=$(echo $BG,, | cut -s -d, -f$1)
+		hex=$(echo $BG,,, | cut -s -d, -f$1)
 		[ $hex ] || hex=$3  # apply default triadic color
 		eval ${2}=${hex%:*}
 		[ $hex != ${hex#*:} ] && eval ${2}_=${hex#*:}
 	}
 
-	setbg 1 NORMAL   96f8f8:-12
-	setbg 2 INSERT   fff5e8:9
-	setbg 3 CAPSLOCK ffd9b6:-7
+	setbg 1 NORMAL    96f8f8:-12
+	setbg 2 INSERT    fff5e8:9
+	setbg 3 CAPSLOCK  ffd9b6:-7
+	setbg 4 SECONDARY ffe5b4
 
 	# ............................................................. Color palette
 
@@ -102,7 +103,7 @@ evaluate-commands %sh{
 		normal   )
 			background="rgb:${NORMAL}"
 			menu="rgb:${INSERT}"
-			secondary="${light_orange}"
+			secondary="rgb:${SECONDARY}"
 			comment="$(desaturate ${background})"
 			if [ $lighten ] ;then
 				# cursor="${vivid_cyan}"
