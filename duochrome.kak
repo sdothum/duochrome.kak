@@ -48,7 +48,8 @@ evaluate-commands %sh{
 	}
 
 	setbg 1 NORMAL    96f8f8:-12
-	setbg 2 INSERT    fff5e8:9
+	# setbg 2 INSERT  fff5e8:9
+	setbg 2 INSERT    ffeacf:9
 	setbg 3 CAPSLOCK  ffd9b6:-7
 	setbg 4 SECONDARY ffe5b4
 
@@ -138,8 +139,9 @@ evaluate-commands %sh{
 			cursor="${vivid_cyan}"
 			secondary="rgb:${CAPSLOCK}"
 			if [ $lighten ] ;then
-				ruler="$(lightness ${background} ${INSERT_:-9})"
-				comment="$(desaturate $(lightness ${background} -18) '5 / 6')"
+				background="$(lightness ${background} ${INSERT_:-9})"
+				ruler="rgb:${INSERT}"
+				comment="$(desaturate $(lightness ${ruler} -18) '5 / 6')"
 			else
 				ruler="$(desaturate ${background} '42 / 43')"
 				comment="${desaturated_orange}"
@@ -152,7 +154,7 @@ evaluate-commands %sh{
 	linenr="$(desaturate ${background} '11 / 13')"
 	pick="$(desaturate ${pale_cyan})"
 	statusbar="${background}"
-	statusline="$(desaturate ${background})"
+	statusline="$(desaturate ${background} '6 / 11')"
 	# info="$(desaturate ${soft_red} '12 / 15')"
 	info="$(desaturate ${comment} '12 / 15')"
 
