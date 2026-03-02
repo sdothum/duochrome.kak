@@ -48,8 +48,7 @@ evaluate-commands %sh{
 	}
 
 	setbg 1 NORMAL    96f8f8:-12
-	# setbg 2 INSERT  fff5e8:9
-	setbg 2 INSERT    ffeacf:9
+	setbg 2 INSERT    fff5e8:-7
 	setbg 3 CAPSLOCK  ffd9b6:-7
 	setbg 4 SECONDARY ffe5b4
 
@@ -126,7 +125,7 @@ evaluate-commands %sh{
 					ruler="$(lightness ${background} ${CAPSLOCK_:--7})"
 				else
 					cursor="${vivid_cyan}"  # insert mode cursor and ruler
-					ruler="$(lightness ${pale_orange} ${INSERT_:-9})"
+					ruler="$(lightness rgb:${INSERT} ${INSERT_:--7})"
 				fi
 			else
 				[ "${kak_opt_mode}" = 'normal' ] && cursor="${pale_orange}" || cursor="${vivid_cyan}"
@@ -139,8 +138,7 @@ evaluate-commands %sh{
 			cursor="${vivid_cyan}"
 			secondary="rgb:${CAPSLOCK}"
 			if [ $lighten ] ;then
-				background="$(lightness ${background} ${INSERT_:-9})"
-				ruler="rgb:${INSERT}"
+				ruler="$(lightness ${background} ${INSERT_:--7})"
 				comment="$(desaturate $(lightness ${ruler} -18) '5 / 6')"
 			else
 				ruler="$(desaturate ${background} '42 / 43')"
