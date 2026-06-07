@@ -38,7 +38,7 @@ evaluate-commands %sh{
 	#                            -> ffead0:-7,fff5e8:9,96f8f8:-12,ffd4db (duochromatic orange/cyan theme)
 	#                            -> 96f8f8:-12,fff5e8:9,ffd9b6:-7        (triadic cyan/orange/salmon theme)
 
-   [ "$kak_opt_filetype" = 'markdown' ] && BG=${BG:-ffead0:-7,fff5e8:9,96f8f8:-12,fa8c69}
+   [ "$kak_opt_filetype" = 'markdown' ] && BG=${BG:-ffead0:-7,fffbf7:-7,96f8f8:-12,fa8c69}
 
 	setbg() {
 		hex=$(echo $BG,,, | cut -s -d, -f$1)
@@ -47,9 +47,9 @@ evaluate-commands %sh{
 		[ $hex != ${hex#*:} ] && eval ${2}_=${hex#*:}
 	}
 
-	setbg 1 NORMAL    96f8f8:-12
-	setbg 2 INSERT    fff5e8:-7
-	setbg 3 CAPSLOCK  ffd9b6:-7
+	setbg 1 NORMAL    96f8f8:-14
+	setbg 2 INSERT    fffbf7:-7
+	setbg 3 CAPSLOCK  ffcdd6:-5
 	setbg 4 SECONDARY ffe5b4
 
 	# ............................................................. Color palette
@@ -181,6 +181,13 @@ evaluate-commands %sh{
 
 	cat <<-COLORSCHEME
 
+# Terminal window (edges)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+declare-option str current_background "${background}"
+
+sync-terminal-bg  # SEE: colorscheme.kak
+
 # Syntax highlighting
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -264,6 +271,7 @@ add-highlighter -override window/ dynregex '%reg{/}' 0:SecondarySelection
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # .......................................................................... hop
+
 set-face window hop_label_head                 "${white},${dark_blue}+bF"
 set-face window hop_label_tail                 hop_label_head
 
